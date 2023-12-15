@@ -1,0 +1,43 @@
+﻿@model E_Learning_System.Models.Class
+@{
+    ViewBag.Title = "AddClass";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .container {
+        width: 400px;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        padding: 25px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    }
+
+    .row {
+        margin-top: 15px;
+        padding: 10px;
+    }
+</style>
+
+@using (Html.BeginForm("AddClass", "Admin", FormMethod.Post, new { @class = "edit-profile m-b30", enctype = "multipart/form-data" }))
+{
+    <div class="container p-md-4 p-sm-4">
+
+        <h3 class="text-center">NEW CLASS</h3>
+
+        <div class="row">
+            <div class="col">
+                @Html.LabelFor(x => x.Class_Name, new { @Class = "text-center" })<br />
+                @Html.TextBoxFor(x => x.Class_Name, new { @Class = "form-control", placeholder = "Enter Class Name", required = "required"})
+                @Html.ValidationMessageFor(x => x.Class_Name, null, new { style = "color:red" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <input type="submit" class="btn btn-outline-dark" value="Add Class" style="width:150px; float:right;"/>
+            </div>
+        </div>
+
+    </div>
+}

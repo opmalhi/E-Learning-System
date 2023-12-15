@@ -1,0 +1,315 @@
+﻿@model E_Learning_System.Models.DashboardModel
+@{
+    ViewBag.Title = "E-Learning System";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    body {
+        margin:10px 15px;
+    }
+</style>
+
+<link href="~/Content/adminassets/css/color-1.css" rel="stylesheet" />
+<link href="~/Content/adminassets/css/dashboard.css" rel="stylesheet" />
+<div class="db-breadcrumb">
+    <h4 class="breadcrumb-title">Dashboard</h4>
+    <ul class="db-breadcrumb-list">
+        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+        <li>Dashboard</li>
+    </ul>
+</div>
+
+<!-- Card -->
+<div class="row">
+    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
+        <div class="widget-card widget-bg1">
+            <div class="wc-item">
+                <h4 class="wc-title">
+                    No. of Users
+                </h4>
+                <span class="wc-des">
+                    All Users Value
+                </span>
+                <span class="wc-stats counter">
+                    @Model.total_users
+                </span>
+                <div class="progress wc-progress">
+                    <div class="progress-bar" role="progressbar" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
+        <div class="widget-card widget-bg4">
+            <div class="wc-item">
+                <h4 class="wc-title">
+                    No. of Admins
+                </h4>
+                <span class="wc-des">
+                    Admins Review
+                </span>
+                <span class="wc-stats counter">
+                    @Model.total_admins
+                </span>
+                <div class="progress wc-progress">
+                    <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
+        <div class="widget-card widget-bg2">
+            <div class="wc-item">
+                <h4 class="wc-title">
+                    No. of Students
+                </h4>
+                <span class="wc-des">
+                    Students Review
+                </span>
+                <span class="wc-stats counter">
+                    @Model.total_students
+                </span>
+                <div class="progress wc-progress">
+                    <div class="progress-bar" role="progressbar" style="width: 88%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
+        <div class="widget-card widget-bg3">
+            <div class="wc-item">
+                <h4 class="wc-title ">
+                    No. of Teachers
+                </h4>
+                <span class="wc-des">
+                    Teacher's Review
+                </span>
+                <span class="wc-stats counter">
+                    @Model.total_teachers
+                </span>
+                <div class="progress wc-progress">
+                    <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
+        <div class="widget-card widget-bg4">
+            <div class="wc-item">
+                <h4 class="wc-title">
+                    Classes
+                </h4>
+                <span class="wc-des">
+                    Students Review
+                </span>
+                <span class="wc-stats counter">
+                    @Model.total_classes
+                </span>
+                <div class="progress wc-progress">
+                    <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
+        <div class="widget-card widget-bg4">
+            <div class="wc-item">
+                <h4 class="wc-title">
+                    Subjects
+                </h4>
+                <span class="wc-des">
+                    Subjects Review
+                </span>
+                <span class="wc-stats counter">
+                    @Model.total_subjects
+                </span>
+                <div class="progress wc-progress">
+                    <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<br>
+<br>
+
+<div class="db-breadcrumb">
+    <h4 class="breadcrumb-title">Charts</h4>
+</div>
+
+<!-- DONUT CHART 01 -->
+@*<div class="card card-danger" style="display:inline-block; width:48%;">
+    <div class="card-header">
+        <h4 class="card-title" style="text-align: center">Users & Admins </h4>
+        <meta name="viewport" content="width=device-width" />
+    </div>
+    <div class="card-body">
+        <div style="text-align: center">
+            <canvas id="Doughnutcanvas"></canvas>
+        </div>
+    </div>
+</div>*@
+
+<!-- DONUT CHART 02 -->
+
+<div class="row">
+    <div class="col">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h4 class="card-title" style="text-align: center">Users Comparison</h4>
+                <meta name="viewport" content="width=device-width" />
+            </div>
+            <div class="card-body">
+                <div style="text-align: center">
+                    <canvas id="Doughnutcanvas2"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="col">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h4 class="card-title" style="text-align: center">Bars According To Users</h4>
+                <meta name="viewport" content="width=device-width" />
+            </div>
+            <div class="card-body">
+                <div style="text-align: center">
+                    <canvas id="barcanvas"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@*<br>
+<br>
+<br>*@
+
+<!-- BAR CHART -->
+
+<br>
+<br>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/0.6.1/progressbar.min.js" integrity="sha512-7IoDEsIJGxz/gNyJY/0LRtS45wDSvPFXGPuC7Fo4YueWMNOmWKMAllEqo2Im3pgOjeEwsOoieyliRgdkZnY0ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js" integrity="sha512-+/4Q+xH9jXbMNJzNt2eMrYv/Zs2rzr4Bu2thfvzlshZBvH1g+VGP55W8b6xfku0c0KknE7qlbBPhDPrHFbgK4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/function-plot/1.22.8/function-plot.js" integrity="sha512-5q5FX8Fdy/bUEurwyMuC8g6Jv083LrK4yry74q0Xl1NTXsRio0h1BRiRkRwsTP1CJ92zduGh4ug4RBUPzmT3wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js" integrity="sha512-ZKNVEa7gi0Dz4Rq9jXcySgcPiK+5f01CqW+ZoKLLKr9VMXuCsw3RjWiv8ZpIOa0hxO79np7Ec8DDWALM0bDOaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script>
+    //First DonutChart
+    @*var donut =
+        {
+            labels: ["ALL-USERS", "ALL-TEACHERS"],
+            datasets: [{
+                backgroundColor: [
+                    "#42188a",
+                    "#ec3261",
+                ],
+                borderWidth: 2,
+                data: [@Model.total_users,@Model.total_teachers]
+            }]
+        };*@
+    //Second DonutChart
+    var donut2 =
+    {
+        labels: ["STUDENTS", "TEACHERS", "ADMINS"],
+        datasets: [{
+            backgroundColor: [
+                "#275efd",
+                "#2596be",
+                "#063970",
+            ],
+            borderWidth: 2,
+            data: [@Model.total_students,@Model.total_teachers,@Model.total_admins]
+        }]
+    };
+
+    //Bar Chart
+    var bar =
+    {
+        labels: ["ALL-USERS", "ALL-ADMINS", "ALL-TEACHER", "ALL-STUDENTS"],
+            datasets: [{
+                label: "ALL-USERS",
+                backgroundColor: [
+                    "#db4b24",
+                    "#668bff",
+                    "#8340f6",
+                    "#8699fb",
+                ],
+                borderWidth: 2,
+                data: [@Model.total_users,@Model.total_admins,@Model.total_teachers,@Model.total_students]
+            }]
+    };
+
+
+    window.onload = function () {
+        //First DonutChart
+        //var ctx1 = document.getElementById("Doughnutcanvas").getContext("2d");
+        //window.myBar = new Chart(ctx1,
+        //    {
+        //        type: 'doughnut',
+        //        data: donut,
+        //        options:
+        //            {
+        //                title:
+        //                {
+        //                    display: true,
+        //                },
+        //                responsive: true,
+        //                maintainAspectRatio: true
+        //            }
+        //    });
+        //Second DonutChart
+        
+        var ctx2 = document.getElementById("Doughnutcanvas2").getContext("2d");
+        window.myBar = new Chart(ctx2,
+            {
+                type: 'doughnut',
+                data: donut2,
+                options:
+                    {
+                        title:
+                        {
+                            display: true,
+                        },
+                        responsive: true,
+                        maintainAspectRatio: true
+                    }
+            });
+        //Bar Chart
+        var barchart = document.getElementById("barcanvas").getContext("2d");
+        window.myBar = new Chart(barchart,
+            {
+                type: 'bar',
+                data: bar,
+                options: {
+                    title:
+                    {
+                        display: true,
+                    },
+                    responsive: true,
+                    maintainAspectRatio: true
+                }
+            });
+    }
+</script>

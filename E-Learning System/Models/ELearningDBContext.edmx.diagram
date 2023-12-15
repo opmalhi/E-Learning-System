@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="81a491aede1d4e6da89a277af344fc14" Name="Diagram1" ZoomLevel="65">
+        <EntityTypeShape EntityType="ELearningSystemDBContext.Class" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="ELearningSystemDBContext.Exam" Width="1.5" PointX="8.625" PointY="4.75" />
+        <EntityTypeShape EntityType="ELearningSystemDBContext.StudentAttendance" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="ELearningSystemDBContext.Subject" Width="1.5" PointX="5.75" PointY="7.625" />
+        <EntityTypeShape EntityType="ELearningSystemDBContext.TeacherSubject" Width="1.5" PointX="6.25" PointY="2.75" />
+        <EntityTypeShape EntityType="ELearningSystemDBContext.User" Width="1.5" PointX="3.625" PointY="2.5" />
+        <EntityTypeShape EntityType="ELearningSystemDBContext.UserRole" Width="1.5" PointX="0.75" PointY="2.75" />
+        <AssociationConnector Association="ELearningSystemDBContext.Class_Id" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__Exam__Class_Id__36B12243" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__StudentAt__Class__32E0915F" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__Subject__Class_I__267ABA7A" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__TeacherSu__Class__2E1BDC42" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__Exam__Subject_Id__37A5467C" />
+        <AssociationConnector Association="ELearningSystemDBContext.TS_ID" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__StudentAt__Subje__33D4B598" />
+        <AssociationConnector Association="ELearningSystemDBContext.FK__TeacherSu__Subje__2F10007B" />
+        <AssociationConnector Association="ELearningSystemDBContext.User_Id" />
+        <AssociationConnector Association="ELearningSystemDBContext.Role_Id" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

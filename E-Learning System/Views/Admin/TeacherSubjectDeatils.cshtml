@@ -1,0 +1,75 @@
+﻿@model E_Learning_System.Models.TeacherSubject
+
+@{
+    ViewBag.Title = "TeacherSubjectDeatils";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .container {
+        width: 400px;
+        margin-top: 50px;
+        margin-bottom: 75px;
+        padding: 25px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    }
+
+    .row {
+        margin-top: 15px;
+        padding: 10px;
+    }
+</style>
+
+    <div class="container p-md-4 p-sm-4">
+
+        <h3 class="text-center">INFOMATION ASSIGN TEACHER SUBJECT</h3>
+
+        <div class="row">
+            <div class="col">
+                @Html.HiddenFor(x => x.TS_ID)
+                @Html.LabelFor(x => x.TS_ID, new { @Class = "text-center" })<br />
+                @Html.TextBoxFor(x => x.TS_ID, new { @Class = "form-control", disabled = "disabled", required = "required", style = "margin-top:10px;" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                @Html.Label("Class", new { @Class = "text-center" })<br />
+                @Html.DropDownListFor(model => model.Class_Id, ViewBag.Class_Id as SelectList, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                @Html.Label("Subject", new { @Class = "text-center" })<br />
+                @Html.DropDownListFor(model => model.Subject_Id, ViewBag.Subject_Id as SelectList, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+
+        @*<div class="row">
+            <div class="col">
+                @Html.Label("Teacher", new { @Class = "text-center" })<br />
+                @Html.DropDownListFor(model => model.TS_ID, ViewBag.Teacher_Id as SelectList, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>*@
+
+
+        @*<div class="row">
+            <div class="col">
+                @Html.LabelFor(x => x.IsActive, new { @Class = "text-center", style = "margin-right:10px" })
+                @Html.CheckBox("IsActive", Model.IsActive.HasValue ? Model.IsActive : false)
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="col">
+                <a href="/Admin/ViewTeacherSubject">
+                <input type="text" class="btn btn-outline-dark" value="Back" style="width:150px; float:right;" />
+
+                </a>
+            </div>
+        </div>
+
+    </div>
+

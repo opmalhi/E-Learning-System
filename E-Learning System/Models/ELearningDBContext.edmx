@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ELearningSystemDBContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Class_Id" />
+          </Key>
+          <Property Name="Class_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Name" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Exam_Id" />
+          </Key>
+          <Property Name="Exam_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Id" Type="int" />
+          <Property Name="Subject_Id" Type="int" />
+          <Property Name="Roll_No" Type="int" />
+          <Property Name="TotalMarks" Type="int" />
+          <Property Name="OutOfMarks" Type="int" />
+          <Property Name="TS_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentAttendance">
+          <Key>
+            <PropertyRef Name="Attendance_Id" />
+          </Key>
+          <Property Name="Attendance_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Id" Type="int" />
+          <Property Name="Subject_Id" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Roll_No" Type="int" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_Id" />
+          </Key>
+          <Property Name="Subject_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Id" Type="int" />
+          <Property Name="Subject_Name" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="TeacherSubject">
+          <Key>
+            <PropertyRef Name="TS_ID" />
+          </Key>
+          <Property Name="TS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Id" Type="int" />
+          <Property Name="Subject_Id" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Roll_No" Type="int" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="Contact_No" Type="int" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Class_Id" Type="int" />
+          <Property Name="Role_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="Class_Id">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Exam__Class_Id__36B12243">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Exam__Subject_Id__37A5467C">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAt__Class__32E0915F">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="StudentAttendance">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAt__Subje__33D4B598">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="StudentAttendance">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__Class_I__267ABA7A">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeacherSu__Class__2E1BDC42">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeacherSu__Subje__2F10007B">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_Id">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Role_Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TS_ID">
+          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="0..1" />
+          <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherSubject">
+              <PropertyRef Name="TS_ID" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="TS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Id">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ELearningSystemDBContextStoreContainer">
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentAttendance" EntityType="Self.StudentAttendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Class_Id" Association="Self.Class_Id">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exam__Class_Id__36B12243" Association="Self.FK__Exam__Class_Id__36B12243">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exam__Subject_Id__37A5467C" Association="Self.FK__Exam__Subject_Id__37A5467C">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAt__Class__32E0915F" Association="Self.FK__StudentAt__Class__32E0915F">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="StudentAttendance" EntitySet="StudentAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAt__Subje__33D4B598" Association="Self.FK__StudentAt__Subje__33D4B598">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="StudentAttendance" EntitySet="StudentAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__Class_I__267ABA7A" Association="Self.FK__Subject__Class_I__267ABA7A">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeacherSu__Class__2E1BDC42" Association="Self.FK__TeacherSu__Class__2E1BDC42">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeacherSu__Subje__2F10007B" Association="Self.FK__TeacherSu__Subje__2F10007B">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+          </AssociationSet>
+          <AssociationSet Name="Role_Id" Association="Self.Role_Id">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="TS_ID" Association="Self.TS_ID">
+            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
+          <AssociationSet Name="User_Id" Association="Self.User_Id">
+            <End Role="User" EntitySet="User" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ELearningSystemDBContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ELearningDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="ELearningSystemDBContext.Class" />
+          <EntitySet Name="Exams" EntityType="ELearningSystemDBContext.Exam" />
+          <EntitySet Name="StudentAttendances" EntityType="ELearningSystemDBContext.StudentAttendance" />
+          <EntitySet Name="Subjects" EntityType="ELearningSystemDBContext.Subject" />
+          <EntitySet Name="TeacherSubjects" EntityType="ELearningSystemDBContext.TeacherSubject" />
+          <EntitySet Name="Users" EntityType="ELearningSystemDBContext.User" />
+          <EntitySet Name="UserRoles" EntityType="ELearningSystemDBContext.UserRole" />
+          <AssociationSet Name="Class_Id" Association="ELearningSystemDBContext.Class_Id">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exam__Class_Id__36B12243" Association="ELearningSystemDBContext.FK__Exam__Class_Id__36B12243">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Exam" EntitySet="Exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAt__Class__32E0915F" Association="ELearningSystemDBContext.FK__StudentAt__Class__32E0915F">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="StudentAttendance" EntitySet="StudentAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__Class_I__267ABA7A" Association="ELearningSystemDBContext.FK__Subject__Class_I__267ABA7A">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeacherSu__Class__2E1BDC42" Association="ELearningSystemDBContext.FK__TeacherSu__Class__2E1BDC42">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exam__Subject_Id__37A5467C" Association="ELearningSystemDBContext.FK__Exam__Subject_Id__37A5467C">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Exam" EntitySet="Exams" />
+          </AssociationSet>
+          <AssociationSet Name="TS_ID" Association="ELearningSystemDBContext.TS_ID">
+            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+            <End Role="Exam" EntitySet="Exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAt__Subje__33D4B598" Association="ELearningSystemDBContext.FK__StudentAt__Subje__33D4B598">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="StudentAttendance" EntitySet="StudentAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeacherSu__Subje__2F10007B" Association="ELearningSystemDBContext.FK__TeacherSu__Subje__2F10007B">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="User_Id" Association="ELearningSystemDBContext.User_Id">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="Role_Id" Association="ELearningSystemDBContext.Role_Id">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Class_Id" />
+          </Key>
+          <Property Name="Class_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="ELearningSystemDBContext.Class_Id" FromRole="Class" ToRole="User" />
+          <NavigationProperty Name="Exams" Relationship="ELearningSystemDBContext.FK__Exam__Class_Id__36B12243" FromRole="Class" ToRole="Exam" />
+          <NavigationProperty Name="StudentAttendances" Relationship="ELearningSystemDBContext.FK__StudentAt__Class__32E0915F" FromRole="Class" ToRole="StudentAttendance" />
+          <NavigationProperty Name="Subjects" Relationship="ELearningSystemDBContext.FK__Subject__Class_I__267ABA7A" FromRole="Class" ToRole="Subject" />
+          <NavigationProperty Name="TeacherSubjects" Relationship="ELearningSystemDBContext.FK__TeacherSu__Class__2E1BDC42" FromRole="Class" ToRole="TeacherSubject" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Exam_Id" />
+          </Key>
+          <Property Name="Exam_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Id" Type="Int32" />
+          <Property Name="Subject_Id" Type="Int32" />
+          <Property Name="Roll_No" Type="Int32" />
+          <Property Name="TotalMarks" Type="Int32" />
+          <Property Name="OutOfMarks" Type="Int32" />
+          <Property Name="TS_ID" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="ELearningSystemDBContext.FK__Exam__Class_Id__36B12243" FromRole="Exam" ToRole="Class" />
+          <NavigationProperty Name="Subject" Relationship="ELearningSystemDBContext.FK__Exam__Subject_Id__37A5467C" FromRole="Exam" ToRole="Subject" />
+          <NavigationProperty Name="TeacherSubject" Relationship="ELearningSystemDBContext.TS_ID" FromRole="Exam" ToRole="TeacherSubject" />
+        </EntityType>
+        <EntityType Name="StudentAttendance">
+          <Key>
+            <PropertyRef Name="Attendance_Id" />
+          </Key>
+          <Property Name="Attendance_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Id" Type="Int32" />
+          <Property Name="Subject_Id" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Roll_No" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="ELearningSystemDBContext.FK__StudentAt__Class__32E0915F" FromRole="StudentAttendance" ToRole="Class" />
+          <NavigationProperty Name="Subject" Relationship="ELearningSystemDBContext.FK__StudentAt__Subje__33D4B598" FromRole="StudentAttendance" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_Id" />
+          </Key>
+          <Property Name="Subject_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Id" Type="Int32" />
+          <Property Name="Subject_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Class" Relationship="ELearningSystemDBContext.FK__Subject__Class_I__267ABA7A" FromRole="Subject" ToRole="Class" />
+          <NavigationProperty Name="Exams" Relationship="ELearningSystemDBContext.FK__Exam__Subject_Id__37A5467C" FromRole="Subject" ToRole="Exam" />
+          <NavigationProperty Name="StudentAttendances" Relationship="ELearningSystemDBContext.FK__StudentAt__Subje__33D4B598" FromRole="Subject" ToRole="StudentAttendance" />
+          <NavigationProperty Name="TeacherSubjects" Relationship="ELearningSystemDBContext.FK__TeacherSu__Subje__2F10007B" FromRole="Subject" ToRole="TeacherSubject" />
+        </EntityType>
+        <EntityType Name="TeacherSubject">
+          <Key>
+            <PropertyRef Name="TS_ID" />
+          </Key>
+          <Property Name="TS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Id" Type="Int32" />
+          <Property Name="Subject_Id" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="ELearningSystemDBContext.FK__TeacherSu__Class__2E1BDC42" FromRole="TeacherSubject" ToRole="Class" />
+          <NavigationProperty Name="Exams" Relationship="ELearningSystemDBContext.TS_ID" FromRole="TeacherSubject" ToRole="Exam" />
+          <NavigationProperty Name="Subject" Relationship="ELearningSystemDBContext.FK__TeacherSu__Subje__2F10007B" FromRole="TeacherSubject" ToRole="Subject" />
+          <NavigationProperty Name="User" Relationship="ELearningSystemDBContext.User_Id" FromRole="TeacherSubject" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Roll_No" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_No" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Class_Id" Type="Int32" />
+          <Property Name="Role_Id" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="ELearningSystemDBContext.Class_Id" FromRole="User" ToRole="Class" />
+          <NavigationProperty Name="TeacherSubjects" Relationship="ELearningSystemDBContext.User_Id" FromRole="User" ToRole="TeacherSubject" />
+          <NavigationProperty Name="UserRole" Relationship="ELearningSystemDBContext.Role_Id" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="ELearningSystemDBContext.Role_Id" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="Class_Id">
+          <End Type="ELearningSystemDBContext.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Exam__Class_Id__36B12243">
+          <End Type="ELearningSystemDBContext.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.Exam" Role="Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAt__Class__32E0915F">
+          <End Type="ELearningSystemDBContext.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.StudentAttendance" Role="StudentAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="StudentAttendance">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__Class_I__267ABA7A">
+          <End Type="ELearningSystemDBContext.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.Subject" Role="Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeacherSu__Class__2E1BDC42">
+          <End Type="ELearningSystemDBContext.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Exam__Subject_Id__37A5467C">
+          <End Type="ELearningSystemDBContext.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.Exam" Role="Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TS_ID">
+          <End Type="ELearningSystemDBContext.TeacherSubject" Role="TeacherSubject" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.Exam" Role="Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherSubject">
+              <PropertyRef Name="TS_ID" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="TS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAt__Subje__33D4B598">
+          <End Type="ELearningSystemDBContext.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.StudentAttendance" Role="StudentAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="StudentAttendance">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeacherSu__Subje__2F10007B">
+          <End Type="ELearningSystemDBContext.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Id">
+          <End Type="ELearningSystemDBContext.User" Role="User" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_Id">
+          <End Type="ELearningSystemDBContext.UserRole" Role="UserRole" Multiplicity="0..1" />
+          <End Type="ELearningSystemDBContext.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Role_Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ELearningSystemDBContextStoreContainer" CdmEntityContainer="ELearningDBContext">
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="TS_ID" ColumnName="TS_ID" />
+                <ScalarProperty Name="OutOfMarks" ColumnName="OutOfMarks" />
+                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+                <ScalarProperty Name="Roll_No" ColumnName="Roll_No" />
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="Exam_Id" ColumnName="Exam_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentAttendances">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.StudentAttendance">
+              <MappingFragment StoreEntitySet="StudentAttendance">
+                <ScalarProperty Name="Roll_No" ColumnName="Roll_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="Attendance_Id" ColumnName="Attendance_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Subject_Name" ColumnName="Subject_Name" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherSubjects">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.TeacherSubject">
+              <MappingFragment StoreEntitySet="TeacherSubject">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="TS_ID" ColumnName="TS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Roll_No" ColumnName="Roll_No" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="ELearningSystemDBContext.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

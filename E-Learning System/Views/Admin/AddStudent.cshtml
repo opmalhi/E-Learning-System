@@ -1,0 +1,92 @@
+﻿@model E_Learning_System.Models.Student
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .row {
+        margin: 25px 100px;
+    }
+
+    label {
+        margin-bottom: 10px;
+    }
+</style>
+
+@using (Html.BeginForm("AddStudent", "Admin", FormMethod.Post, new { @class = "edit-profile m-b30", enctype = "multipart/form-data" }))
+{
+<div class="container p-md-4 p-sm-4">
+
+    <h3 class="text-center">ADD STUDENT</h3>
+
+    <div class="row">
+        <div class="col-6">
+            @Html.LabelFor(x => x.Student_Name, new { @Class = "text-center" })<br />
+            @Html.TextBoxFor(x => x.Student_Name, new { @Class = "form-control", placeholder = "Enter Student Name", required = "required" })
+            @Html.ValidationMessageFor(x => x.Student_Name, null, new { style = "color:red" })
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(x => x.DOB, new { @Class = "text-center" })<br />
+            @Html.TextBoxFor(x => x.DOB, new { @Class = "form-control", type = "date", required = "required", max = "31-12-2000" })
+            @Html.ValidationMessageFor(x => x.DOB, null, new { style = "color:red" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            @Html.LabelFor(x => x.Gender, new { @Class = "text-center" })<br />
+            @Html.DropDownListFor(x=>x.Gender, new List<SelectListItem>
+            {
+                  new SelectListItem { Text = "Male", Value = "Male"},
+                  new SelectListItem { Text = "Female", Value = "Female"},
+            }, "Select Gender", new { @class = "form-dropdown" })
+            @Html.ValidationMessageFor(x => x.Gender, null, new { style = "color:red" })
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(x => x.Contact_No, new { @Class = "text-center" })<br />
+            @Html.TextBoxFor(x => x.Contact_No, new { @Class = "form-control", type = "number", placeholder = "012345678", required = "required" })
+            @Html.ValidationMessageFor(x => x.Contact_No, null, new { style = "color:red" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            @Html.Label("Class", new { @Class = "text-center" })<br />
+            @Html.DropDownList("Class_Id", ViewBag.Class_Id as SelectList, "Select Class", new { @class = "form-control", required = "required" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            @Html.Label("Class", new { @Class = "text-center" })<br />
+            @Html.DropDownList("Class_Id", ViewBag.Class_Id as SelectList, "Select Class", new { @class = "form-control", required = "required" })
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(x => x.Roll_No, new { @Class = "text-center" })<br />
+            @Html.TextBoxFor(x => x.Roll_No, new { @Class = "form-control", placeholder = "Enter Roll No", required = "required" })
+            @Html.ValidationMessageFor(x => x.Roll_No, null, new { style = "color:red" })
+        </div>
+        @*<div class="col-6">
+            @Html.LabelFor(x => x.Password, new { @Class = "text-center" })<br />
+            @Html.TextBoxFor(x => x.Password, new { @Class = "form-control", placeholder = "Enter Password", type = "Password", required = "required" })
+            @Html.ValidationMessageFor(x => x.Password, null, new { style = "color:red" })
+        </div>*@
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            @Html.LabelFor(x => x.Address, new { @Class = "text-center" })<br />
+            @Html.TextAreaFor(x => x.Address, new { @Class = "form-control", placeholder = "Enter Address", required = "required" })
+            @Html.ValidationMessageFor(x => x.Address, null, new { style = "color:red" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <input type="submit" class="btn btn-outline-dark" value="Add Student" style="width:150px; float:right;" />
+        </div>
+    </div>
+
+</div>
+}

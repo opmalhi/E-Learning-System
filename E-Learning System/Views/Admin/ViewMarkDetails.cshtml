@@ -1,0 +1,64 @@
+﻿@model E_Learning_System.Models.Exam
+@{
+    ViewBag.Title = "ViewMarkDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<style>
+    .row {
+        margin: 25px 100px;
+    }
+
+    label {
+        margin-bottom: 10px;
+    }
+</style>
+
+
+    <div class="container p-md-4 p-sm-4">
+
+        <h3 class="text-center">MARKS DETAILS</h3>
+
+        <div class="row">
+            <div class="col-6">
+                @Html.Label("Class", new { @Class = "text-center" })<br />
+                @Html.DropDownListFor(model => model.Class_Id, ViewBag.Class_Id as SelectList, new { @class = "form-control", disabled="disabled" })
+            </div>
+            <div class="col-6">
+                @Html.Label("Subject", new { @Class = "text-center" })<br />
+                @Html.DropDownListFor(model => model.Subject_Id, ViewBag.Student_Id as SelectList, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                @Html.LabelFor(x => x.Roll_No, new { @Class = "text-center" })<br />
+                @Html.TextBoxFor(x => x.Roll_No, new { @Class = "form-control", placeholder = "Enter Roll No", type = "number", required = "required", disabled = "disabled" })
+                @Html.ValidationMessageFor(x => x.Roll_No, null, new { style = "color:red" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                @Html.LabelFor(x => x.OutOfMarks, new { @Class = "text-center" })<br />
+                @Html.TextBoxFor(x => x.OutOfMarks, new { @Class = "form-control", type = "number", placeholder = "Enter Obtained Marks", required = "required", disabled = "disabled" })
+                @Html.ValidationMessageFor(x => x.OutOfMarks, null, new { style = "color:red" })
+            </div>
+            <div class="col-6">
+                @Html.LabelFor(x => x.TotalMarks, new { @Class = "text-center" })<br />
+                @Html.TextBoxFor(x => x.TotalMarks, new { @Class = "form-control", type = "number", placeholder = "Enter Total Marks", required = "required", disabled = "disabled" })
+                @Html.ValidationMessageFor(x => x.TotalMarks, null, new { style = "color:red" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <a href="/Admin/ViewMarks"><input type='text' class="btn btn-outline-dark" value="Back" style="width:150px; float:right;" /></a>
+                @*<a href="/Admin/ViewMarks" class="btn btn-outline-dark" value="Back" style="width:150px; float:right;" />*@
+            </div>
+        </div>
+
+    </div>
+
